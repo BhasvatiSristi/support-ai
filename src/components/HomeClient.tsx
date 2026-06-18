@@ -5,7 +5,10 @@ import axios from 'axios'
 import { useRouter } from 'next/navigation'
 
 const HomeClient = ({ email }: { email: string }) => {
+    const [loading,setLoading] = useState(false)
+
     const handleLogin = () => {
+        setLoading(true)
         window.location.href = "/api/auth/login"
     }
 
@@ -101,8 +104,8 @@ const HomeClient = ({ email }: { email: string }) => {
                     </div> : <button
                         className='px-5 py-2 rounded-full bg-zinc-800 text-white text-sm font-medium
                         hover:bg-black transition disabled:opacity-60 flex items-center gap-2
-                        cursor-pointer' onClick={handleLogin}>
-                        Login
+                        cursor-pointer' onClick={handleLogin} disabled={loading}>
+                        {loading?"Loading..":"Login"}
                     </button>}
                 </div>
             </motion.div>
