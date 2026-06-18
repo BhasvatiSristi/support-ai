@@ -1,4 +1,9 @@
 const mongo_url = process.env.MONGODB_URL
+
+import dns from "dns";
+
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
+
 import { connect } from "mongoose"
 
 if(!mongo_url){
@@ -11,18 +16,23 @@ if(!cache){
 }
 
 const connectDb = async () =>{
+    console.log("Attempting MongoDB connection...");
+    console.log("URL exists:", !!mongo_url);
     if(cache.conn){
+        console.log("Using cached connection");
         return cache.conn
     }
     if(!cache.promise){
         cache.promise = connect(mongo_url!).then((c)=>c.connection)
     }
 
-    try{
-        cache.conn = await cache.promise
-    }catch (err){
-        console.log(err)
+    try {
+        cache.conn = await cache.promise;
+    } catch (err) {
+        console.error("MongoDB connection failed:", err);
+        throw err;
     }
+    console.log("MongoDB connected successfully");
     return cache.conn
 }
 
