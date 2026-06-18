@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Temporary MongoDB test files
+test.js
+dns-text.js
+dns-force.js
+dns-server.js
+dns-text.js

@@ -4,6 +4,16 @@ import dns from "dns";
 
 dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
+console.log("DNS SERVERS:", dns.getServers());
+
+dns.resolveSrv(
+  "_mongodb._tcp.cluster0.9vag8j2.mongodb.net",
+  (err, records) => {
+    console.log("SRV TEST ERROR:", err);
+    console.log("SRV TEST RECORDS:", records);
+  }
+);
+
 import { connect } from "mongoose"
 
 if(!mongo_url){
