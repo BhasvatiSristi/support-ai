@@ -13,11 +13,11 @@ export async function GET(req:NextRequest){
     const session = await scalekit.authenticateWithCode(code,redirectUrl)
     console.log(session)
     const response = NextResponse.redirect(`${process.env.NEXT_PUBLIC_APP_URL}`)
-    response.cookies.set("access_token",(await session).accessToken,{
-        httpOnly:true,
-        maxAge:24*60*60*1000,
-        secure:true,
-        path:'/'
+    response.cookies.set("access_token", session.accessToken, {
+        httpOnly: true,
+        maxAge: 24 * 60 * 60, // seconds
+        secure: process.env.NODE_ENV === "production",
+        path: "/"
     })
 
     return response
