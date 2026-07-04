@@ -22,24 +22,6 @@ SupportAI is a full-stack AI-powered customer support platform that enables busi
 
 ---
 
-## 📸 Screenshots
-
-> Add screenshots here after uploading them.
-
-### Home Page
-
-![Home Page](./screenshots/home.png)
-
-### Dashboard
-
-![Dashboard](./screenshots/dashboard.png)
-
-### Chatbot
-
-![Chatbot](./screenshots/chatbot.png)
-
----
-
 ## 🛠️ Tech Stack
 
 ### Frontend
