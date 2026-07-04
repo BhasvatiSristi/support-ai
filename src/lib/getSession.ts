@@ -15,17 +15,6 @@ export async function getSession() {
         Buffer.from(token.split(".")[1], "base64").toString()
     );
 
-    console.log("TOKEN PAYLOAD:", payload);
-
-    console.log("NOW:", Math.floor(Date.now() / 1000));
-    console.log("NBF:", payload.nbf);
-    console.log("IAT:", payload.iat);
-    console.log("EXP:", payload.exp);
-    console.log(
-        "Difference:",
-        payload.nbf - Math.floor(Date.now() / 1000)
-    );
-
     try {
         // TEMPORARY TEST
         await new Promise(resolve => setTimeout(resolve, 3000));
