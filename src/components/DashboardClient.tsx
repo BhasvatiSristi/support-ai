@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { motion } from "motion/react"
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
@@ -10,8 +10,70 @@ function DashboardClient({ownerId}:{ownerId:string}) {
     const [businessName,setBusinessName] = useState("")
     const [supportEmail,setSupportEmail] = useState("")
     const [knowledge,setKnowledge] = useState("")
+    const [websiteUrl,setWebsiteUrl] = useState("")
+    const [loadingWebsite,setLoadingWebsite] = useState(false)
     const [loading,setLoading] = useState(false)
     const [saved,setSaved] = useState(false)
+    const [toast,setToast] = useState<{message:string,type:'success'|'error'} | null>(null)
+    const toastTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+    const showToast = (message:string, type:'success'|'error') => {
+        if(toastTimerRef.current){
+            clearTimeout(toastTimerRef.current)
+        }
+
+        setToast({message,type})
+        toastTimerRef.current = setTimeout(()=>{
+            setToast(null)
+        },3000)
+    }
+
+    useEffect(()=>{
+        return ()=>{
+            if(toastTimerRef.current){
+                clearTimeout(toastTimerRef.current)
+            }
+        }
+    },[])
+
+    const isValidWebsiteUrl = (value:string) => {
+        try {
+            const parsedUrl = new URL(value)
+            return parsedUrl.protocol === 'http:' || parsedUrl.protocol === 'https:'
+        } catch {
+            return false
+        }
+    }
+
+    const handleAutoLearn = async () => {
+        const trimmedUrl = websiteUrl.trim()
+
+        if(!isValidWebsiteUrl(trimmedUrl)){
+            showToast("Unable to learn website.", "error")
+            return
+        }
+
+        setLoadingWebsite(true)
+
+        try {
+            const result = await axios.post("/api/autolearn", {
+                websiteUrl: trimmedUrl,
+            })
+
+            if(result.data?.success && typeof result.data?.knowledge === 'string'){
+                setKnowledge(result.data.knowledge)
+                showToast("Website learned successfully.", "success")
+                return
+            }
+
+            showToast("Unable to learn website.", "error")
+        } catch(err) {
+            console.log(err)
+            showToast("Unable to learn website.", "error")
+        } finally {
+            setLoadingWebsite(false)
+        }
+    }
 
     const handleSettings = async () => {
         setLoading(true)
@@ -91,6 +153,32 @@ function DashboardClient({ownerId}:{ownerId:string}) {
                     </div>
                 </div>
                 <div className='mb-10'>
+                    <h1 className='text-lg font-medium mb-2'>Website URL</h1>
+                    <p className='text-sm text-zinc-500 mb-4'>Enter your business website. SupportAI will automatically learn your website content and build the chatbot knowledge base.</p>
+                    <div className='flex flex-col gap-3 md:flex-row md:items-stretch'>
+                        <input
+                            type='url'
+                            className='min-w-0 flex-1 rounded-xl border border-zinc-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black/80'
+                            placeholder='https://yourbusiness.com'
+                            value={websiteUrl}
+                            onChange={(e)=>{setWebsiteUrl(e.target.value)}}
+                        />
+                        <motion.button
+                            whileHover={{ scale: 1.03 }}
+                            whileTap={{ scale: 0.97 }}
+                            type='button'
+                            disabled={loadingWebsite}
+                            onClick={handleAutoLearn}
+                            className='inline-flex items-center justify-center gap-2 rounded-xl bg-zinc-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-60 md:min-w-40'
+                        >
+                            {loadingWebsite && (
+                                <span className='h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white' />
+                            )}
+                            {loadingWebsite ? 'Learning...' : 'Auto Learn'}
+                        </motion.button>
+                    </div>
+                </div>
+                <div className='mb-10'>
                     <h1 className='text-lg font-medium mb-4'>Knowledge Base</h1>
                     <p className='text-sm text-zinc-500 mb-4'>Add FAQs, policies, delivery information, refunds, etc.</p>
                     <div className='space-y-4'>
@@ -127,6 +215,15 @@ function DashboardClient({ownerId}:{ownerId:string}) {
             </div>
             </motion.div>
         </div>
+        {toast && (
+            <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                className={`fixed right-4 top-20 z-50 max-w-sm rounded-xl border px-4 py-3 text-sm font-medium shadow-lg ${toast.type === 'success' ? 'border-emerald-200 bg-emerald-50 text-emerald-700' : 'border-rose-200 bg-rose-50 text-rose-700'}`}
+            >
+                {toast.message}
+            </motion.div>
+        )}
     </div>
   )
 }
