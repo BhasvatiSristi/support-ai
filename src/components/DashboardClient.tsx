@@ -119,12 +119,20 @@ function DashboardClient({ownerId}:{ownerId:string}) {
                 <div className='max-x-7xl mx-auto px-6 h-16 flex items-center justify-between'>
                     <div className='text-lg font-semibold tracking-tight' onClick={()=>navigate.push('/')}>Support
                         <span className='text-zinc-500'>AI</span></div>
-                        <button className='px-4 py-2 rounded-lg border
-                                            border-zinc-300 text-sm 
-                                            hover:bg-zinc-100 transition'
-                                            onClick={()=>navigate.push("/embed")}>
-                            Embed Chatbot
-                        </button>
+                        <div className='flex items-center gap-3'>
+                            <button className='px-4 py-2 rounded-lg border
+                                                border-zinc-300 text-sm 
+                                                hover:bg-zinc-100 transition'
+                                                onClick={()=>navigate.push("/dashboard/insights")}>
+                                AI Insights
+                            </button>
+                            <button className='px-4 py-2 rounded-lg border
+                                                border-zinc-300 text-sm 
+                                                hover:bg-zinc-100 transition'
+                                                onClick={()=>navigate.push("/embed")}>
+                                Embed Chatbot
+                            </button>
+                        </div>
                 </div>
             </motion.div>
         

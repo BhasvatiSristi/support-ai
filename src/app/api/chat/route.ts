@@ -1,11 +1,12 @@
 import connectDb from "@/lib/db";
+import { generateAndSaveChatInsight } from "@/lib/chatInsights";
 import Settings from "@/model/settings.model";
 import { GoogleGenAI } from "@google/genai";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req:NextRequest){
     try{
-        const { message, ownerId } = await req.json()
+        const { message, ownerId, conversationId, customerMessages, botResponses, conversationHistory } = await req.json()
         if(!message || !ownerId){
             return NextResponse.json(
                 {message:"Message and OwnerId are required"},
@@ -22,12 +23,6 @@ export async function POST(req:NextRequest){
                 {status:400}
             )
         }
-
-        const KNOWLEDGE = `
-        business name - ${setting.businessName || "not provided" }
-        support email - ${setting.supportEmail || "not provided" }
-        knowledge - ${setting.knowledge || "not provided" }
-        `
 
         const prompt = `
             You are an intelligent multilingual customer support assistant.
@@ -94,6 +89,17 @@ export async function POST(req:NextRequest){
         contents: prompt,
     });
     console.log(res.text);
+
+    await generateAndSaveChatInsight({
+        ownerId,
+        conversationId,
+        customerMessages: Array.isArray(customerMessages) ? customerMessages : [message],
+        botResponses: Array.isArray(botResponses) ? botResponses : [res.text || ""],
+        conversationHistory: Array.isArray(conversationHistory) ? conversationHistory : undefined,
+        latestCustomerMessage: message,
+        latestBotResponse: res.text || "",
+    })
+
     const response =  NextResponse.json(res.text)
     response.headers.set("Access-Control-Allow-Origin", "*");
     response.headers.set("Access-Control-Allow-Methods", "POST, OPTIONS");
