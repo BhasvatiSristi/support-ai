@@ -2,6 +2,8 @@
 
 SupportAI is a full-stack AI-powered customer support platform that enables businesses to create and deploy intelligent chatbots on their websites with minimal setup. Businesses can customize the chatbot with their own knowledge base, generate context-aware responses, and integrate the chatbot into any website using a single JavaScript script.
 
+It also generates private AI Insights for the business owner after customer conversations, summarizing issues, sentiment, priority, and resolution status inside the admin dashboard only.
+
 > 🚀 Built with Next.js, TypeScript, MongoDB, Tailwind CSS, ScaleKit Authentication, and deployed on Vercel.
 
 ---
@@ -15,6 +17,7 @@ SupportAI is a full-stack AI-powered customer support platform that enables busi
 - 🧠 Custom AI knowledge base for business-specific responses
 - 💬 AI-powered customer support chatbot
 - 📋 Admin dashboard for chatbot configuration
+- 📊 Admin-only AI Insights for conversation summaries and support analytics
 - 🌐 One-click chatbot embedding using a JavaScript `<script>` tag
 - 📱 Responsive and modern UI
 - 🎨 Smooth animations with Framer Motion
@@ -62,9 +65,8 @@ SupportAI/
 │   ├── app/
 │   ├── components/
 │   ├── lib/
-│   ├── models/
-│   ├── actions/
-│   └── utils/
+│   ├── model/
+│   └── types.d.ts
 │
 ├── public/
 ├── package.json
@@ -114,7 +116,7 @@ Create a `.env.local` file in the project root.
 ```env
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 
-MONGODB_URI=your_mongodb_connection_string
+MONGODB_URL=your_mongodb_connection_string
 
 SCALEKIT_ENV_URL=your_scalekit_environment_url
 SCALEKIT_CLIENT_ID=your_client_id
@@ -194,6 +196,21 @@ Visitors can:
 - Get instant AI-generated responses
 - Receive business-specific information
 
+### 7. AI Insights Generation
+
+After a customer chat is handled, the conversation is sent to Gemini for structured analysis.
+
+The system stores:
+
+- Issue title
+- Summary
+- Issue category
+- Sentiment
+- Priority
+- Resolution status
+
+These insights are shown only in the admin dashboard at `/dashboard/insights`.
+
 ---
 
 ## 📌 Key Functionalities
@@ -201,8 +218,10 @@ Visitors can:
 - AI-powered customer support
 - Business-specific chatbot configuration
 - Website chatbot embedding
+- Admin-only AI insights and conversation summaries
 - Authentication and authorization
 - Dashboard for chatbot management
+- Searchable insights dashboard with filters and conversation view
 - Responsive design
 - Smooth UI animations
 - Production deployment
@@ -214,7 +233,6 @@ Visitors can:
 - Conversation history
 - Multi-language support
 - Live human agent handoff
-- Analytics dashboard
 - File upload support
 - Knowledge base management
 - Role-based access control
@@ -223,6 +241,7 @@ Visitors can:
 - RAG (Retrieval-Augmented Generation)
 - Voice support
 - Streaming AI responses
+- Conversation analytics exports
 
 ---
 
