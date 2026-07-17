@@ -109,26 +109,26 @@ function DashboardClient({ownerId}:{ownerId:string}) {
     },[ownerId]) 
 
   return (
-    <div className='min-h-screen bg-zinc-50 text-zinc-900'>
+    <div className='min-h-screen bg-linear-to-br from-white via-blue-50 to-blue-100 text-slate-900'>
       <motion.div
                 initial={{ y: -40 }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.4 }}
-                className='fixed top-0 left-0 w-full z-50 bg-white/70 backdrop-blur-xl border-b border-zinc-200'
+                className='fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-blue-100'
             >
                 <div className='max-x-7xl mx-auto px-6 h-16 flex items-center justify-between'>
                     <div className='text-lg font-semibold tracking-tight' onClick={()=>navigate.push('/')}>Support
-                        <span className='text-zinc-500'>AI</span></div>
+                        <span className='text-blue-600'>AI</span></div>
                         <div className='flex items-center gap-3'>
                             <button className='px-4 py-2 rounded-lg border
-                                                border-zinc-300 text-sm 
-                                                hover:bg-zinc-100 transition'
+                                                border-blue-200 text-sm text-blue-700 
+                                                hover:bg-blue-50 transition'
                                                 onClick={()=>navigate.push("/dashboard/insights")}>
                                 AI Insights
                             </button>
                             <button className='px-4 py-2 rounded-lg border
-                                                border-zinc-300 text-sm 
-                                                hover:bg-zinc-100 transition'
+                                                border-blue-200 text-sm text-blue-700 
+                                                hover:bg-blue-50 transition'
                                                 onClick={()=>navigate.push("/embed")}>
                                 Embed Chatbot
                             </button>
@@ -138,35 +138,35 @@ function DashboardClient({ownerId}:{ownerId:string}) {
         
         <div className='flex justify-center px-4 py-14 mt-20'>
             <motion.div
-            className='w-full max-w-3xl bg-white rounded-2xl shadow-xl p-10'>
+            className='w-full max-w-3xl bg-white rounded-2xl shadow-xl border border-blue-100 p-10'>
                 <div className='mb-10'>
                     <h1 className='text-2xl font-semibold'>Chatbot Settings</h1>
-                    <p className='text-zinc-500 mt-1'>Manage your AI chatbot knowledge and business details</p>
+                    <p className='text-slate-500 mt-1'>Manage your AI chatbot knowledge and business details</p>
                 </div>
                 <div className='mb-10'>
                     <h1 className='text-lg font-medium mb-4'>Business Details</h1>
                     <div className='space-y-4'>
                         <input type="text" 
                             className='w-full rounded-xl border
-                                        border-zinc-300 px-4 py-3
+                                        border-blue-200 px-4 py-3
                                         text-sm focus:outline-none focus:ring-2
-                                        focus:ring-black/80' placeholder='Business Name'
+                                        focus:ring-blue-500/20 focus:border-blue-500' placeholder='Business Name'
                                         value={businessName} onChange={(e)=>{setBusinessName(e.target.value)}}/>
                         <input type="text" 
                             className='w-full rounded-xl border
-                                        border-zinc-300 px-4 py-3
+                                        border-blue-200 px-4 py-3
                                         text-sm focus:outline-none focus:ring-2
-                                        focus:ring-black/80' placeholder='Support Email'
+                                        focus:ring-blue-500/20 focus:border-blue-500' placeholder='Support Email'
                                         value={supportEmail} onChange={(e)=>{setSupportEmail(e.target.value)}}/>
                     </div>
                 </div>
                 <div className='mb-10'>
                     <h1 className='text-lg font-medium mb-2'>Website URL</h1>
-                    <p className='text-sm text-zinc-500 mb-4'>Enter your business website. SupportAI will automatically learn your website content and build the chatbot knowledge base.</p>
+                    <p className='text-sm text-slate-500 mb-4'>Enter your business website. SupportAI will automatically learn your website content and build the chatbot knowledge base.</p>
                     <div className='flex flex-col gap-3 md:flex-row md:items-stretch'>
                         <input
                             type='url'
-                            className='min-w-0 flex-1 rounded-xl border border-zinc-300 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-black/80'
+                            className='min-w-0 flex-1 rounded-xl border border-blue-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500'
                             placeholder='https://yourbusiness.com'
                             value={websiteUrl}
                             onChange={(e)=>{setWebsiteUrl(e.target.value)}}
@@ -177,7 +177,7 @@ function DashboardClient({ownerId}:{ownerId:string}) {
                             type='button'
                             disabled={loadingWebsite}
                             onClick={handleAutoLearn}
-                            className='inline-flex items-center justify-center gap-2 rounded-xl bg-zinc-900 px-5 py-3 text-sm font-medium text-white transition hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-60 md:min-w-40'
+                            className='inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60 md:min-w-40'
                         >
                             {loadingWebsite && (
                                 <span className='h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white' />
@@ -188,13 +188,13 @@ function DashboardClient({ownerId}:{ownerId:string}) {
                 </div>
                 <div className='mb-10'>
                     <h1 className='text-lg font-medium mb-4'>Knowledge Base</h1>
-                    <p className='text-sm text-zinc-500 mb-4'>Add FAQs, policies, delivery information, refunds, etc.</p>
+                    <p className='text-sm text-slate-500 mb-4'>Add FAQs, policies, delivery information, refunds, etc.</p>
                     <div className='space-y-4'>
                         <textarea 
                             className='w-full h-54 rounded-xl border
-                                        border-zinc-300 px-4 py-3
+                                        border-blue-200 px-4 py-3
                                         text-sm focus:outline-none focus:ring-2
-                                        focus:ring-black/80' placeholder={`Example:
+                                        focus:ring-blue-500/20 focus:border-blue-500' placeholder={`Example:
 • Refund policy : 7 days return available
 • Delivery time : 3-5 days
 • Cash on delivery(COD) available
@@ -208,8 +208,8 @@ function DashboardClient({ownerId}:{ownerId:string}) {
                 whileTap={{ scale:0.97 }}
                 disabled={loading}
                 onClick={handleSettings}
-                className='px-7 py-3 rounded-xl bg-black text-white
-                            text-sm font-medium hover:bg-zinc-800 
+                className='px-7 py-3 rounded-xl bg-blue-600 text-white
+                            text-sm font-medium hover:bg-blue-700 
                             transition disabled:opacity-60'>
                 {loading?"Saving...": "Save"}
                 </motion.button>
@@ -217,7 +217,7 @@ function DashboardClient({ownerId}:{ownerId:string}) {
                 {saved && <motion.span
                 initial={{ opacity:0, y:6}}
                 animate={{ opacity:1,y:0}}
-                className='text-sm font-medium text-emerald-600'>
+                className='text-sm font-medium text-blue-600'>
                         ✓ Settings Saved
                 </motion.span>}
             </div>
@@ -227,7 +227,7 @@ function DashboardClient({ownerId}:{ownerId:string}) {
             <motion.div
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                className={`fixed right-4 top-20 z-50 max-w-sm rounded-xl border px-4 py-3 text-sm font-medium shadow-lg ${toast.type === 'success' ? 'border-emerald-200 bg-emerald-50 text-emerald-700' : 'border-rose-200 bg-rose-50 text-rose-700'}`}
+                className={`fixed right-4 top-20 z-50 max-w-sm rounded-xl border px-4 py-3 text-sm font-medium shadow-lg ${toast.type === 'success' ? 'border-blue-200 bg-blue-50 text-blue-700' : 'border-rose-200 bg-rose-50 text-rose-700'}`}
             >
                 {toast.message}
             </motion.div>
