@@ -6,10 +6,8 @@ import { NextRequest,NextResponse } from "next/server";
 
 export async function POST(req:NextRequest){
     try{
-        console.log("GET SETTINGS HIT");
 
         const {ownerId} = await req.json();
-        console.log("ownerId:", ownerId);
 
         if(!ownerId){
             return NextResponse.json(
@@ -22,8 +20,6 @@ export async function POST(req:NextRequest){
         console.log("DB connected");
 
         const setting = await Settings.findOne({ownerId});
-
-        console.log("Setting found:", setting);
 
         return NextResponse.json(setting);
 
