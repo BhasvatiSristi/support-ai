@@ -1,6 +1,6 @@
-# 🤖 SupportAI – AI Customer Support Platform
+# 🤖 IntelliSupport – AI Customer Support Platform
 
-SupportAI is a full-stack AI-powered customer support platform that enables businesses to create and deploy intelligent chatbots on their websites with minimal setup. Businesses can customize the chatbot with their own knowledge base, generate context-aware responses, and integrate the chatbot into any website using a single JavaScript script.
+IntelliSupport is a full-stack AI-powered customer support platform that enables businesses to create and deploy intelligent chatbots on their websites with minimal setup. Businesses can customize the chatbot with their own knowledge base, generate context-aware responses, and integrate the chatbot into any website using a single JavaScript script.
 
 It also generates private AI Insights for the business owner after customer conversations, summarizing issues, sentiment, priority, and resolution status inside the admin dashboard only.
 
@@ -59,7 +59,7 @@ It also generates private AI Insights for the business owner after customer conv
 ## 📂 Project Structure
 
 ```
-SupportAI/
+IntelliSupport/
 │
 ├── src/
 │   ├── app/
@@ -160,7 +160,7 @@ The business configuration is stored in **MongoDB**.
 
 ### 4. Generate Embed Script
 
-SupportAI generates a unique JavaScript snippet.
+IntelliSupport generates a unique JavaScript snippet.
 
 Example:
 

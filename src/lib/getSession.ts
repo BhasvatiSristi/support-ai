@@ -5,8 +5,6 @@ export async function getSession() {
     const session = await cookies();
     const token = session.get("access_token")?.value;
 
-    console.log("TOKEN EXISTS:", !!token);
-
     if (!token) {
         return null;
     }

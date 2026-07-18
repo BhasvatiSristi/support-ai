@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
         const normalizedUrl = normalizeWebsiteUrl(websiteUrl.trim());
         const response = await fetch(normalizedUrl, {
             headers: {
-                "User-Agent": "SupportAI Auto Learn Bot",
+                "User-Agent": "IntelliSupport Auto Learn Bot",
                 Accept: "text/html,application/xhtml+xml",
             },
         });

@@ -50,7 +50,7 @@ const HomeClient = ({ email }: { email: string }) => {
         },
         {
             title:"Admin Controlled",
-            desc:"You control what the AI knows and responds."
+            desc:"You control what the AI knows, how it responds and the insights."
         },
         {
             title:"Always Online",
@@ -67,8 +67,7 @@ const HomeClient = ({ email }: { email: string }) => {
                 className='fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-blue-100'
             >
                 <div className='max-x-7xl mx-auto px-6 h-16 flex items-center justify-between'>
-                    <div className='text-lg font-semibold tracking-tight'>Support
-                        <span className='text-blue-600'>AI</span></div>
+                    <div className='text-lg font-semibold tracking-tight'>IntelliSupport</div>
                     {email ? <div className='relative' ref={popupRef}>
                         <button
                             className='w-10 h-10 rounded-full 
@@ -117,9 +116,9 @@ const HomeClient = ({ email }: { email: string }) => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.7 }}
                         className='text-4xl md:text-5xl font-semibold leading-tight'>
-                        <h1>AI Customer Support <br />
+                        <h1>The<span className='text-blue-600'> Customer Support</span><br/>
                             Build for Modern Websites</h1>
-                        <p className='mt-6 text-lg text-slate-600 max-w-xl'>Add a powerful AI Chatbot to your website in minutes.
+                        <p className='mt-6 text-lg text-slate-600 max-w-xl'>Add a powerful AI Chatbot to your website in minutes.<br/>
                             Let your customers get instant answers using your own business knowledge.
                         </p>
                         <div className='mt-10 flex gap-4 text-xl'>
@@ -155,8 +154,9 @@ const HomeClient = ({ email }: { email: string }) => {
                                 Live Chat Preview
                             </div>
                             <div className='space-y-2'>
-                                <div className='bg-blue-600 text-white rounded-lg px-4 py-2 text-sm ml-auto w-fit'>Do you offer COD?</div>
-                                <div className='bg-blue-50 rounded-lg px-4 py-2 text-sm w-fit text-slate-700'>Yes, We do!</div>
+                                <div className='bg-blue-50 rounded-lg px-4 py-2 text-sm w-fit text-slate-700'>Do you offer COD?</div>
+                                <div className='bg-blue-600 text-white rounded-lg px-4 py-2 text-sm ml-auto w-fit'>Yes, We do!</div>
+                                
                             </div>
                             <motion.div
                             animate={{y:[0,12,0]}}
@@ -182,7 +182,7 @@ const HomeClient = ({ email }: { email: string }) => {
                     viewport={{once:false}}
                     transition={{duration:0.5}}
                     className='text-3xl font-semibold text-center'>
-                        Why Businesses choose SupportAI
+                        Why <span className='text-blue-600'>Businesses</span> choose IntelliSupport
                     </motion.h2>
                     <div className='mt-16 grid grid-cols-1 md:grid-cols-3 gap-10'>
                         {features.map((feature,index)=>(
@@ -200,7 +200,7 @@ const HomeClient = ({ email }: { email: string }) => {
                 </div>
             </section>
             <footer className='py-10 text-center text-sm text-blue-500'>
-                &copy;{new Date().getFullYear()} SupportAI. All rights reserved.
+                &copy;{new Date().getFullYear()} IntelliSupport. All rights reserved.
             </footer>
         </div>
     )
