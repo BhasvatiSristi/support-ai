@@ -22,7 +22,7 @@ function EmbedClient({ownerId}:{ownerId:string}) {
         <div className='sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-blue-100'>
             <div className='max-w-7xl mx-auto px-6 h-16 flex items-center justify-between'>
             <div className='text-lg font-semibold cursor-pointer' onClick={()=>navigate.push('/')}>
-                Support<span className='text-blue-600'>AI</span>
+                IntelliSupport
             </div>
             <button className='px-4 py-2 rounded-lg border border-blue-200 text-sm text-blue-700 hover:bg-blue-50 transition'
             onClick={()=>navigate.push("/dashboard")}>Back To Dashboard</button>
